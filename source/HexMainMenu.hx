@@ -211,9 +211,7 @@ class HexMainMenu extends HexMenuState
 		FlxG.watch.addQuick("bpmMod", bpmModifier);
 		getItemByName("note").setGraphicSize(Std.int(getItemByName("note").width * FlxMath.lerp(1, 1.12, beatLerp)));
 
-		#if android
-                addVirtualPad(FULL, A_B);
-                #end
+		
 				
 		if (!toggle)
 		{
