@@ -49,8 +49,8 @@ class SUtil
 		{
 			if (!FileSystem.exists(SUtil.getPath()))
 				FileSystem.createDirectory(SUtil.getPath());
-
-			if (!FileSystem.exists(SUtil.getPath() + 'assets') && !FileSystem.exists(SUtil.getPath() + 'mods'))
+			
+                        if (!FileSystem.exists(SUtil.getPath()  + '/' + 'assets/')/* && !FileSystem.exists(SUtil.getPath() + 'mods/')*/
 			{
 				Application.current.window.alert("Whoops, seems like you didn't extract the files from the .APK!\nPlease watch the tutorial by pressing OK.",
 					'Error!');
@@ -80,7 +80,7 @@ class SUtil
 					System.exit(1);
 				}
 
-				if (!FileSystem.exists(SUtil.getPath() + 'mods'))
+				/*if (!FileSystem.exists(SUtil.getPath() + 'mods'))
 				{
 					Application.current.window.alert("Whoops, seems like you didn't extract the assets/mods folder from the .APK!\nPlease watch the tutorial by pressing OK.",
 						'Error!');
@@ -92,7 +92,7 @@ class SUtil
 					Application.current.window.alert("Why did you create a file called mods instead of copying the mods directory from the .APK?, expect a crash.",
 						'Error!');
 					System.exit(1);
-				}
+				}*/
 			}
 		}
 		#end
