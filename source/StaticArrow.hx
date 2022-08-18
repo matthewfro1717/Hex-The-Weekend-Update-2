@@ -1,6 +1,7 @@
 package;
-
+#if windows
 import LuaClass.LuaReceptor;
+#end
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.animation.FlxBaseAnimation;
@@ -10,7 +11,9 @@ using StringTools;
 
 class StaticArrow extends FlxSprite
 {
+#if windows
 	public var luaObject:LuaReceptor;
+	#end
 	public var modifiedByLua:Bool = false;
 	public var modAngle:Float = 0; // The angle set by modcharts
 	public var localAngle:Float = 0; // The angle to be edited inside here

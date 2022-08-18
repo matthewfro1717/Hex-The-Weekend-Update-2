@@ -3,6 +3,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.FlxSprite;
 import sys.FileSystem;
 import haxe.Json;
+import SUtil;
 
 using StringTools;
 
@@ -45,8 +46,10 @@ class HexMenuData
 		else
 		{
 			path = dataPath;
+			#if windows
 			Debug.logTrace("loading " + path);
-			var jsonShit = sys.io.File.getContent(FileSystem.absolutePath(dataPath));
+			#end
+			var jsonShit = sys.io.File.getContent(SUtil.getPath() + "/assets/assets/hexMenu/data/main-menu.json");
 			var jsonData = Json.parse(jsonShit);
 			data = cast jsonData;
 		}
@@ -67,11 +70,13 @@ class HexMenuItem extends FlxSprite
 	{
 		if (itemMeta.isSparrow)
 		{
+			#if windows
 			Debug.logError("You cannot change the graphic of a sparrow atlas!");
+			#end
 			return;
 		}
 
-		loadGraphic(Paths.image(path, lib));
+		loadGraphic("assets/" + Paths.image(path, lib));
 		setGraphicSize(Std.int(width * itemMeta.scale));
 	}
 
@@ -96,7 +101,9 @@ class HexMenuItem extends FlxSprite
 				anm = i;
 		if (anm == null)
 		{
+			#if windows
 			Debug.logError("failed to play " + name);
+			#end
 			return;
 		}
 		offset.set(anm.offsetX, anm.offsetY);
@@ -115,7 +122,7 @@ class HexMenuState extends MusicBeatState
 
 	public static function loadHexMenu(name):HexMenuData
 	{
-		return new HexMenuData(Paths.json(name, "hexMenu").replace("hexMenu:", ""));
+		return new HexMenuData("assets/" + Paths.json(name, "hexMenu").replace("hexMenu:", ""));
 	}
 
 	var tempArray:Array<HexMenuItem> = [];
@@ -127,7 +134,9 @@ class HexMenuState extends MusicBeatState
 			if (i.itemMeta.name == name)
 				return i;
 		}
+		#if windows
 		Debug.logTrace("couldn't find " + name);
+		#end
 		return null;
 	}
 
@@ -156,8 +165,8 @@ class HexMenuState extends MusicBeatState
 		{
 			var sprite:HexMenuItem = new HexMenuItem(i.x, i.y, i);
 			sprite.antialiasing = true;
-			if (i.isSparrow)
-			{
+		//	if (i.isSparrow)
+		/*	{
 				sprite.frames = Paths.getSparrowAtlas(i.graphicPath, i.graphicLib);
 				for (anim in i.animations)
 				{
@@ -165,9 +174,9 @@ class HexMenuState extends MusicBeatState
 				}
 			}
 			else
-			{
-				sprite.loadGraphic(Paths.image(i.graphicPath, i.graphicLib));
-			}
+			{ */
+				sprite.loadGraphic("assets/" + Paths.image(i.graphicPath, i.graphicLib));
+			//}
 			tempArray.push(sprite);
 			LoadingScreen.progress = Math.floor((index / (hexData.data.length - 1)) * 100);
 			index++;
@@ -195,12 +204,14 @@ class HexMenuState extends MusicBeatState
 					if (i.itemMeta.animations.length != 0)
 					{
 						var an = i.animation.getByName(i.itemMeta.animations[0].name);
+						#if windows
 						Debug.logTrace("playing "
 							+ i.itemMeta.animations[0].name
 								+ " "
 								+ (an != null ? "which it exists" : "it doesn't exist")
 								+ " "
 								+ an.looped);
+								#end
 						i.playAnimation(i.itemMeta.animations[0].name);
 						i.scrollFactor.set();
 					}

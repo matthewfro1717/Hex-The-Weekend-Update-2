@@ -9,8 +9,10 @@ import flixel.util.FlxColor;
 #if polymod
 import polymod.format.ParseRules.TargetSignatureElement;
 #end
+#if windows
 import LuaClass.LuaNote;
 import PlayState;
+#end
 
 using StringTools;
 
@@ -20,9 +22,9 @@ class Note extends FlxSprite
 	public var baseStrum:Float = 0;
 
 	public var charterSelected:Bool = false;
-
+	#if windows
 	public var LuaNote:LuaNote;
-
+	#end
 	public var rStrumTime:Float = 0;
 
 	public var mustPress:Bool = false;
@@ -37,9 +39,9 @@ class Note extends FlxSprite
 	public var isSustainNote:Bool = false;
 	public var originColor:Int = 0; // The sustain note's original note's color
 	public var noteSection:Int = 0;
-
+	#if windows
 	public var luaID:Int = 0;
-
+	#end
 	public var isAlt:Bool = false;
 
 	public var noteCharterObject:FlxSprite;

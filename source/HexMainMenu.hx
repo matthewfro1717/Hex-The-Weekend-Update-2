@@ -114,8 +114,9 @@ class HexMainMenu extends HexMenuState
 			FlxG.save.data.weekendxbeat = false;
 		if (FlxG.save.data.weekxBeat == null)
 			FlxG.save.data.weekxbeat = false;
-
+		#if windows
 		Debug.logTrace(FlxG.save.data.weekendxBeat + " <<<");
+		#end
 
 		if (FlxG.save.data.weekendxBeat)
 		{

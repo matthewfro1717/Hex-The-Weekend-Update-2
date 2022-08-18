@@ -102,14 +102,19 @@ class HexMenuCreator extends MusicBeatState
 					if (i.itemMeta.name == ite)
 					{
 						found = true;
+						#if windows
 						Debug.logTrace("selected " + ite);
+						#end
 						selectedItem = i;
 						populateSprite();
 						break;
 					}
 				}
-				if (!found)
+				if (!found){
+					#if windows
 					Debug.logTrace("couldn't find " + ite);
+					#end
+				}
 			});
 			tab_group_asset.add(selectableItems);
 		}
@@ -138,7 +143,9 @@ class HexMenuCreator extends MusicBeatState
 				ofxEntry.value = i.offsetX;
 				ofyEntry.value = i.offsetY;
 				playAnim();
+				#if windows
 				Debug.logTrace("found anim");
+				#end
 				break;
 			}
 		}
@@ -572,7 +579,9 @@ class HexMenuCreator extends MusicBeatState
 	public function loadGraphic()
 	{
 		var path = Paths.image(assetPath.text, assetLib.text);
+		#if windows
 		Debug.logTrace("trying to find " + path);
+		#end
 		if (Paths.doesImageAssetExist(path))
 		{
 			newSpriteIndex++;

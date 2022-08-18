@@ -2,9 +2,6 @@ package;
 
 import flixel.addons.display.FlxBackdrop;
 import sys.thread.Mutex;
-#if FEATURE_STEPMANIA
-import smTools.SMFile;
-#end
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -50,11 +47,9 @@ class TitleState extends MusicBeatState
 	{
 		MasterObjectLoader.mutex = new Mutex();
 		// TODO: Refactor this to use OpenFlAssets.
-		#if FEATURE_FILESYSTEM
-		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets/replays"))
-			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/replays");
+		#if android
+		FlxG.android.preventDefaultKeys = [BACK];
 		#end
-
 		@:privateAccess
 		{
 			Debug.logTrace("We loaded " + openfl.Assets.getLibrary("default").assetsLoaded + " assets into the default library");

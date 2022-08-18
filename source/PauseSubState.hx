@@ -46,12 +46,6 @@ class PauseSubState extends MusicBeatSubstate
 	{
 		super();
 
-		if (PlayState.instance.useVideo)
-		{
-			menuItems.remove("Resume");
-			if (GlobalVideo.get().playing)
-				GlobalVideo.get().pause();
-		}
 
 		if (FlxG.sound.music.playing)
 			FlxG.sound.music.pause();
@@ -204,7 +198,6 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.startTime = 0;
 					if (PlayState.instance.useVideo)
 					{
-						GlobalVideo.get().stop();
 						PlayState.instance.remove(PlayState.instance.videoSprite);
 						PlayState.instance.removedVideo = true;
 					}
@@ -220,7 +213,6 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.startTime = 0;
 					if (PlayState.instance.useVideo)
 					{
-						GlobalVideo.get().stop();
 						PlayState.instance.remove(PlayState.instance.videoSprite);
 						PlayState.instance.removedVideo = true;
 					}
@@ -246,14 +238,6 @@ class PauseSubState extends MusicBeatSubstate
 
 					FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, PlayState.instance.handleInput);
 					FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, PlayState.instance.releaseInput);
-					if (PlayState.instance.coolingHandler != null)
-					{
-						Debug.logTrace("removing cooling video");
-						PlayState.instance.remove(PlayState.instance.coolingVideo);
-						PlayState.instance.coolingVideo.destroy();
-						PlayState.instance.coolingHandler.kill();
-						PlayState.instance.coolingHandler.bitmap.dispose();
-					}
 					if (PlayState.isStoryMode)
 					{
 						GameplayCustomizeState.freeplayBf = 'bf';

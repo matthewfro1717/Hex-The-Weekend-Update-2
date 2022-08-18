@@ -21,7 +21,9 @@ class LoadingScreen extends MusicBeatState
 	public function new(_target:MusicBeatState, song:Bool = false)
 	{
 		target = _target;
+		#if windows
 		Debug.logTrace("bruhg");
+		#end
 		loadMutex = new Mutex();
 		loadingSong = song;
 		super();
@@ -46,8 +48,9 @@ class LoadingScreen extends MusicBeatState
 		bar.createFilledBar(FlxColor.TRANSPARENT, FlxColor.fromRGB(255, 22, 210));
 		bar.scrollFactor.set();
 		add(bar);
-
+		#if windows
 		Debug.logTrace("lets do some loading " + bar);
+		#end
 
 		super.create();
 	}
@@ -60,11 +63,15 @@ class LoadingScreen extends MusicBeatState
 			sys.thread.Thread.create(() ->
 			{
 				loadMutex.acquire();
+				#if windows
 				Debug.logTrace("reset da assets");
+				#end
 				MasterObjectLoader.resetAssets();
 				target.load();
 				target.loadedCompletely = true;
+				#if windows
 				Debug.logTrace("we done lets gtfo " + target);
+				#end
 				switchState(target, false, true);
 				loadMutex.release();
 			});

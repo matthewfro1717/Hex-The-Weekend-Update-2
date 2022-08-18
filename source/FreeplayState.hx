@@ -82,11 +82,11 @@ class FreeplayState extends MusicBeatState
 	{
 		list = CoolUtil.coolTextFile(Paths.txt('data/freeplaySonglist'));
 
-		populateSongData();
+	//	populateSongData();
 
-		#if !FEATURE_STEPMANIA
+		#if !windows
 		trace("FEATURE_STEPMANIA was not specified during build, sm file loading is disabled.");
-		#elseif FEATURE_STEPMANIA
+		#elseif windows
 		// TODO: Refactor this to use OpenFlAssets.
 		trace("tryin to load sm files");
 		for (i in FileSystem.readDirectory("assets/sm/"))
@@ -231,6 +231,7 @@ class FreeplayState extends MusicBeatState
 	/**
 	 * Load song data from the data files.
 	 */
+	 #if windows
 	static function populateSongData()
 	{
 		cached = false;
@@ -294,6 +295,7 @@ class FreeplayState extends MusicBeatState
 			}
 		}
 	}
+	#end
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String)
 	{
@@ -512,7 +514,9 @@ class FreeplayState extends MusicBeatState
 	{
 		// Make sure song data is initialized first.
 		if (songData == null || Lambda.count(songData) == 0)
+		#if windows
 			populateSongData();
+			#end
 
 		var realDiff = difficulty;
 
@@ -535,7 +539,7 @@ class FreeplayState extends MusicBeatState
 
 		PlayState.SONG = currentSongData;
 		PlayState.isStoryMode = false;
-		PlayState.storyDifficulty = realDiff;
+		PlayState.storyDifficulty = difficulty;
 		PlayState.storyWeek = songs[curSelected].week;
 		Debug.logInfo('Loading song ${PlayState.SONG.songName} from week ${PlayState.storyWeek} into Free Play...');
 		#if FEATURE_STEPMANIA
@@ -654,7 +658,7 @@ class FreeplayState extends MusicBeatState
 		else
 			diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
 
-		#if PRELOAD_ALL
+		#if windows
 		if (songs[curSelected].songCharacter == "sm")
 		{
 			var data = songs[curSelected];

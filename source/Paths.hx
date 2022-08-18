@@ -68,8 +68,9 @@ class Paths
 			return FlxGraphic.fromBitmapData(bitmap);
 		}
 		else
-		{
+		{			#if windows
 			Debug.logWarn('Could not find image at path $path');
+			#end
 			return null;
 		}
 	}
@@ -91,9 +92,10 @@ class Paths
 		}
 		catch (e)
 		{
+			#if windows
 			Debug.logError("AN ERROR OCCURRED parsing a JSON file.");
 			Debug.logError(e.message);
-
+			#end
 			// Return null.
 			return null;
 		}
@@ -264,6 +266,16 @@ class Paths
 		if (isCharacter)
 		{
 			return FlxAtlasFrames.fromSparrow(loadImage('characters/$key', library), file('images/characters/$key.xml', library));
+		}
+		var atlas = loadImage(key, library);
+		return FlxAtlasFrames.fromSparrow(atlas, file('images/$key.xml', library));
+	}
+
+	static public function getSparrowAtlasd(key:String, ?library:String, ?isCharacter:Bool = false)
+	{
+		if (isCharacter)
+		{
+			return FlxAtlasFrames.fromSparrow("assets/" + loadImage('characters/$key', library), file('assets/images/characters/$key.xml', library));
 		}
 		var atlas = loadImage(key, library);
 		return FlxAtlasFrames.fromSparrow(atlas, file('images/$key.xml', library));

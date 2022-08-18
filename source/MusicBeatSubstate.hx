@@ -112,7 +112,9 @@ class MusicBeatSubstate extends FlxSubState
 		{
 			if (!PlayState.instance.paused && !PlayState.instance.endingSong && PlayState.instance.songStarted)
 			{
+				#if windows
 				Debug.logTrace("Lost Focus");
+				#end
 				PlayState.instance.openSubState(new PauseSubState());
 				PlayState.boyfriend.stunned = true;
 
@@ -128,7 +130,9 @@ class MusicBeatSubstate extends FlxSubState
 
 	function onWindowFocusIn():Void
 	{
+		#if windows
 		Debug.logTrace("IM BACK!!!");
+		#end
 		(cast(Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.fpsCap);
 	}
 }
