@@ -262,7 +262,7 @@ class HexMainMenu extends HexMenuState
 		getItemByName("options").setPosition(Boxes[4].x, Boxes[4].y);
 		getItemByName("credits").setPosition(Boxes[5].x, Boxes[5].y);
 
-		if (FlxG.keys.justPressed.ENTER)
+		if (controls.ACCEPT)
 		{
 			selectThing();
 		}
