@@ -211,6 +211,10 @@ class HexMainMenu extends HexMenuState
 		FlxG.watch.addQuick("bpmMod", bpmModifier);
 		getItemByName("note").setGraphicSize(Std.int(getItemByName("note").width * FlxMath.lerp(1, 1.12, beatLerp)));
 
+		#if android
+                addVirtualPad(FULL, A_B);
+                #end
+				
 		if (!toggle)
 		{
 			lerp += elapsed * 0.3;
@@ -225,12 +229,12 @@ class HexMainMenu extends HexMenuState
 				toggle = !toggle;
 			getItemByName("backdrop").y = FlxMath.lerp(16, -16, lerp);
 		}
-		if (FlxG.keys.justPressed.DOWN)
+		if (controls.DOWN_P)
 		{
 			selectedIndex++;
 			select();
 		}
-		if (FlxG.keys.justPressed.UP)
+		if (controls.UP_P)
 		{
 			selectedIndex--;
 			select();
