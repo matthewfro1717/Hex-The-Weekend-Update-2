@@ -49,7 +49,7 @@ class HexMenuData
 			#if windows
 			Debug.logTrace("loading " + path);
 			#end
-			var jsonShit = sys.io.File.getContent(SUtil.getPath() + "assets/assets/hexMenu/data/main-menu.json");
+			var jsonShit = sys.io.File.getContent(SUtil.getPath() + "/assets/assets/hexMenu/data/main-menu.json");
 			var jsonData = Json.parse(jsonShit);
 			data = cast jsonData;
 		}
