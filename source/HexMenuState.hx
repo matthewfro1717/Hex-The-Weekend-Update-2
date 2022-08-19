@@ -47,11 +47,11 @@ class HexMenuData
 		{
 			path = dataPath;
 			#if windows
-			Debug.logTrace("loading " + path);
-			#end
+			Debug.logTrace("loading " + path);			
 			var jsonShit = sys.io.File.getContent("/assets/assets/hexMenu/data/main-menu.json");
 			var jsonData = Json.parse(jsonShit);
 			data = cast jsonData;
+			#end
 		}
 	}
 }
