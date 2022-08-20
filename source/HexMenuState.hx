@@ -50,8 +50,8 @@ class HexMenuData
 			Debug.logTrace("loading " + path);
 			#end
 				
-			var jsonShit = sys.io.File.getContent(SUtil.getPath() + "/assets/assets/main-menu.json");
-			var jsonData = Json.parse(jsonShit);
+			var jsonShit = Paths.file("/assets/assets/hexMenu/data/main-menu.json");
+			var jsonData = haxe.Json.parse(sys.io.File.getContent(SUtil.getPath() + jsonShit);
 			data = cast jsonData;
 			
 		}
