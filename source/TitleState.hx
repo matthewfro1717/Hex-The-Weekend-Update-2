@@ -297,13 +297,13 @@ class TitleState extends MusicBeatState
 					returnedData[0] = data.substring(0, data.indexOf(';'));
 					returnedData[1] = data.substring(data.indexOf('-'), data.length);
 
-					switchState(new HexStoryMenu(HexStoryMenu.loadHexStoryMenu("main-menu")));
+					switchState(new PlayState());
 				}
 
 				http.onError = function(error)
 				{
 					trace('error: $error');
-					switchState(new HexStoryMenu(HexStoryMenu.loadHexStoryMenu("main-menu")));
+					switchState(new PlayState());
 					clean();
 				}
 
