@@ -297,13 +297,38 @@ class TitleState extends MusicBeatState
 					returnedData[0] = data.substring(0, data.indexOf(';'));
 					returnedData[1] = data.substring(data.indexOf('-'), data.length);
 
-					switchState(new HexFreeplayMenu());
+					trace('error: $error');
+					PlayState.sicks = 0;
+					PlayState.bads = 0;
+					PlayState.shits = 0;
+					PlayState.goods = 0;
+					PlayState.campaignMisses = 0;
+					PlayState.SONG = Song.conversionChecks(Song.loadFromJson(PlayState.storyPlaylist[0], "-hard"));
+					Debug.logTrace("stuff");
+					PlayState.storyWeek = 0;
+					PlayState.campaignScore = 0;
+					new FlxTimer().start(1, function(tmr:FlxTimer)
+					{
+						switchState(new PlayState(), true);
+					});
 				}
 
 				http.onError = function(error)
 				{
 					trace('error: $error');
-					switchState(new HexFreeplayMenu());
+					PlayState.sicks = 0;
+					PlayState.bads = 0;
+					PlayState.shits = 0;
+					PlayState.goods = 0;
+					PlayState.campaignMisses = 0;
+					PlayState.SONG = Song.conversionChecks(Song.loadFromJson(PlayState.storyPlaylist[0], "-hard"));
+					Debug.logTrace("stuff");
+					PlayState.storyWeek = 0;
+					PlayState.campaignScore = 0;
+					new FlxTimer().start(1, function(tmr:FlxTimer)
+					{
+						switchState(new PlayState(), true);
+					});
 					clean();
 				}
 
