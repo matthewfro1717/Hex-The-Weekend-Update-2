@@ -211,6 +211,8 @@ class HexMainMenu extends HexMenuState
 		FlxG.watch.addQuick("bpmMod", bpmModifier);
 		getItemByName("note").setGraphicSize(Std.int(getItemByName("note").width * FlxMath.lerp(1, 1.12, beatLerp)));
 
+		
+				
 		if (!toggle)
 		{
 			lerp += elapsed * 0.3;
@@ -225,12 +227,12 @@ class HexMainMenu extends HexMenuState
 				toggle = !toggle;
 			getItemByName("backdrop").y = FlxMath.lerp(16, -16, lerp);
 		}
-		if (FlxG.keys.justPressed.DOWN)
+		if (controls.DOWN_P)
 		{
 			selectedIndex++;
 			select();
 		}
-		if (FlxG.keys.justPressed.UP)
+		if (controls.UP_P)
 		{
 			selectedIndex--;
 			select();
@@ -258,7 +260,7 @@ class HexMainMenu extends HexMenuState
 		getItemByName("options").setPosition(Boxes[4].x, Boxes[4].y);
 		getItemByName("credits").setPosition(Boxes[5].x, Boxes[5].y);
 
-		if (FlxG.keys.justPressed.ENTER)
+		if (controls.ACCEPT)
 		{
 			selectThing();
 		}
