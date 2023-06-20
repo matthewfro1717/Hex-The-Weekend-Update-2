@@ -274,6 +274,8 @@ class HexFreeplayMenu extends HexMenuState
 				TitleText.text = "GLITCHER (REMIX)";
 			else if (songs[selectedIndex].songId == "lcd")
 				TitleText.text = "LCD";
+			else if (songs[selectedIndex].songId == "detected-dave-and-bambi")
+				TitleText.text = "DETECTED DAVE AND BAMBI COVER";
 			else
 				TitleText.text = songs[selectedIndex].songId.toUpperCase().replace("-", " ");
 			ArtistText.text = "YINGYANG48";
