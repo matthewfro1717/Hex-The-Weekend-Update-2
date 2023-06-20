@@ -15,9 +15,7 @@ class Character extends FlxSprite
 	public var animOffsets:Map<String, Array<Dynamic>>;
 	public var debugMode:Bool = false;
 
-	public var isPlayer:Bool = false;
 	public var curCharacter:String = 'bf';
-	public var barColor:FlxColor;
 
 	public var holdTimer:Float = 0;
 
@@ -25,7 +23,6 @@ class Character extends FlxSprite
 	{
 		super(x, y);
 
-		barColor = isPlayer ? FlxColor.fromRGB(35, 94, 246) : 0xFFFF0000;
 		animOffsets = new Map<String, Array<Dynamic>>();
 		curCharacter = character;
 		this.isPlayer = isPlayer;
@@ -50,13 +47,6 @@ class Character extends FlxSprite
 				animation.addByPrefix('hey', 'bambi look', 24, false);
 				animation.addByPrefix('singSmash', 'bambi phone', 24, false);
 				animation.addByPrefix('singThrow', 'bambi throw', 24, false);
-				
-				barColor = FlxColor.fromRGB(37, 191, 55);
-
-				loadOffsetFile(curCharacter + (isPlayer ? '-playable' : ''));
-				
-				globalOffset = [37, 90];
-				skins.set('recursed', 'bambi-recursed');
 
 				playAnim('idle');
 			case 'dave':
@@ -69,13 +59,18 @@ class Character extends FlxSprite
 					animation.addByPrefix('sing${anim.toUpperCase()}miss', '$anim miss', 24, false);
 				}
 				animation.addByPrefix('hey', 'hey', 24, false);
-	
-				globalOffset = [0, -170];
 
-				skins.set('recursed', 'dave-recursed');
-				loadOffsetFile(curCharacter + (isPlayer ? '-playable' : ''));
-
-				barColor = FlxColor.fromRGB(15, 95, 255);
+				playAnim('idle');
+			case 'dave-detected':
+				// DAVE SHITE ANIMATION LOADING CODE
+				frames = Paths.getSparrowAtlas('dave/characters/dave_hex', 'shared');
+				animation.addByPrefix('idle', 'idle', 24, false);
+				for (anim in ['left', 'down', 'up', 'right'])
+				{
+					animation.addByPrefix('sing${anim.toUpperCase()}', '${anim}0', 24, false);
+					animation.addByPrefix('sing${anim.toUpperCase()}miss', '$anim miss', 24, false);
+				}
+				animation.addByPrefix('hey', 'hey', 24, false);
 
 				playAnim('idle');
 			case 'gf':
