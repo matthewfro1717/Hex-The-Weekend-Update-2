@@ -16,6 +16,7 @@ class Character extends FlxSprite
 	public var debugMode:Bool = false;
 
 	public var curCharacter:String = 'bf';
+	public var barColor:FlxColor;
 
 	public var holdTimer:Float = 0;
 
